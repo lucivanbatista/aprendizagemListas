@@ -17,5 +17,4 @@ def mae(y_true, y_pred):
     som = 0.0
     for i in range(n):
         som += abs(y_true[i] - y_pred[i])
-    mae = som / n
-    return mae
+    return som / n 
