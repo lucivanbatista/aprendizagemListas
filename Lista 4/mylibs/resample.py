@@ -1,4 +1,3 @@
-import math
 import numpy as np
 
 # n_elem - número total de elementos.
@@ -9,13 +8,12 @@ import numpy as np
 # um com os índices de treino. Exemplo para n_splits=3, teremos idx_train[0], idx_train[1] e idx_train[2].
 # um com os índices de teste. Exemplo para n_splits=3, teremos idx_test[0], idx_test[1] e idx_test[2].
 
-def slipt_k_fold(n_elem, n_splits, shuffle, seed):
+def slipt_k_fold(n_elem, n_splits, shuffle=True, seed=0):
     total = [ i for i in range(n_elem)]
     
     if shuffle:
-        np.random.shuffle(total)# no array dos índices vamos misturar
-    if seed:
-        np.random.seed(seed)
+        np.random.shuffle(total) # no array dos índices vamos misturar
+    np.random.seed(seed)
     
     fold_sizes = (n_elem // n_splits) * np.ones(n_splits, dtype=np.int)
     fold_sizes[:n_elem % n_splits] += 1
