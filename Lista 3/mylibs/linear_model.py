@@ -3,23 +3,24 @@ import numpy as np
 
 class SimpleLinearRegression:
     
+    def __isNumpyArray(self, arr):
+        return type(arr) == np.ndarray
+    
     #b1
     def coef(self, x, y):
+        if self.__isNumpyArray(x):
+            x = x[:, 0]
+        
         meanX = st.mean(x)
         meanY = st.mean(y)
-        somNum = 0.0
-        somDen = 0.0
-        for i in range(len(x)):
-            somNum += (x[i] - meanX) * (y[i] - meanY)
-            somDen += (x[i] - meanX) ** 2
-        return somNum / somDen
+        return np.sum((x - meanX) * (y - meanY)) / np.sum((x - meanX) ** 2)
 
     #b0
     def intercept(self, x, y, b1):
         meanX = st.mean(x)
         meanY = st.mean(y)
         intercept_b0 = meanY - self.b1 * meanX
-        return intercept_b0[0]
+        return intercept_b0
     
     def fit(self, x, y):
         self.b1 = self.coef(x, y)
